@@ -1,6 +1,6 @@
 import React from 'react'
 import Brand from '../brand/Brand'
-import Enlace from '../buttons/link'
+import Enlace from '../buttons/Link';
 
 
 const Header = () => {
