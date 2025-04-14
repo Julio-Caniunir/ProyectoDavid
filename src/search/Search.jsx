@@ -1,29 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Item from '../Item/Item';
 import './search.css';
 import { FaSearch } from "react-icons/fa";
-import { io } from "socket.io-client";
-import useSocket from '../Hooks/useSocket';
 
-
-const socket = io("http://bc-api.estelarbet.net");
-// 🔧 Limpia puntos y guiones del RUT
 const limpiarRUT = (rut) => rut.replace(/\./g, '').replace(/-/g, '').toLowerCase();
-// ✅ Permite RUT con o sin guion
+
 const validarRUT = (rut) => {
-
   const rutLimpio = limpiarRUT(rut);
-  const regexRUT = /^[0-9]{7,8}[0-9Kk]$/; // sin puntos, sin guion
+  const regexRUT = /^[0-9]{7,8}[0-9Kk]$/;
   return regexRUT.test(rutLimpio);
-
 };
 
 const Search = () => {
-  const { members } = useSocket(socket, 'campaign-1');
+  const [members, setMembers] = useState([]);
   const [busqueda, setBusqueda] = useState("");
   const [resultados, setResultados] = useState([]);
   const [error, setError] = useState("");
 
+  useEffect(() => {
+    fetch("https://socket-proxy-2dre.onrender.com/members")
+      .then((res) => res.json())
+      .then((data) => setMembers(data))
+      .catch((err) => {
+        console.error("Error al obtener miembros:", err);
+        setError("No se pudo conectar al servidor.");
+      });
+  }, []);
 
   const manejarCambio = (e) => {
     setBusqueda(e.target.value);
@@ -46,14 +48,12 @@ const Search = () => {
     const resultadosFiltrados = members.filter(participante =>
       limpiarRUT(participante.rut) === limpiarRUT(busqueda)
     );
-console.log("Resultados filtrados:", resultadosFiltrados); // Para depuración
 
     setResultados(resultadosFiltrados);
 
     if (resultadosFiltrados.length === 0) {
       setError("No se encontró ningún participante con ese RUT.");
     }
-
   };
 
   return (
