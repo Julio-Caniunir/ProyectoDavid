@@ -1,25 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './SearchDesktop.module.css';
-import { FaSearch, } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
-import { io } from "socket.io-client";
-import useSocket from '../Hooks/useSocket';
-import Boleto from './../Item/Boleto'
+import Boleto from './../Item/Boleto';
 
-
-const socket = io("https://bc-api.estelarbet.net");
-
-// 🔧 Limpia puntos y guiones del RUT
 const limpiarRUT = (rut) => rut.replace(/\./g, '').replace(/-/g, '').toLowerCase();
 
-// ✅ Permite RUT con o sin guion
 const validarRUT = (rut) => {
   const rutLimpio = limpiarRUT(rut);
-  const regexRUT = /^[0-9]{7,8}[0-9Kk]$/; // sin puntos, sin guion
+  const regexRUT = /^[0-9]{7,8}[0-9Kk]$/;
   return regexRUT.test(rutLimpio);
 };
 
-//  Formatea a XX.XXX.XXX-Y
 const formatearRUT = (rut) => {
   const clean = rut.replace(/\D/g, '');
   const cuerpo = clean.slice(0, -1);
@@ -33,18 +25,30 @@ const formatearRUT = (rut) => {
 };
 
 const SearchDesktop = () => {
-  const { members } = useSocket(socket, 'campaign-1'); // igual que en mobile
   const [rut, setRut] = useState('');
   const [user, setUser] = useState(null);
   const [rewards, setRewards] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [members, setMembers] = useState([]);
 
+  // 🔌 Fetch desde Netlify Function (proxy)
+  useEffect(() => {
+    fetch("/socket-proxy")
+      .then((res) => res.json())
+      .then((data) => {
+        setMembers(data);
+      })
+      .catch((err) => {
+        console.error("Error al obtener datos desde el proxy:", err);
+        setError("No se pudo conectar al servidor.");
+      });
+  }, []);
 
   const handleSearch = () => {
-    setLoading(true); // Inicia loader
+    setLoading(true);
 
-    setTimeout(() => { // Simula tiempo de espera suave
+    setTimeout(() => {
       if (rut.trim() === '') {
         setError("El campo RUT no puede estar vacío.");
         setUser(null);
@@ -68,7 +72,7 @@ const SearchDesktop = () => {
       if (encontrado) {
         setUser({
           name: encontrado.fullName,
-          rut: formatearRUT(encontrado.rut)
+          rut: formatearRUT(encontrado.rut),
         });
 
         const premios = [
@@ -76,20 +80,20 @@ const SearchDesktop = () => {
             title: 'PAPAS FRITAS',
             description: 'Regístrate y obtén el primer premio',
             status: encontrado.isRegistered === 'true' ? 'Ganado' : 'Pendiente',
-            icon: '/icons/fries.png'
+            icon: '/icons/fries.png',
           },
           {
             title: 'BEBIDA A ELECCIÓN',
             description: 'Verifica tu cuenta',
             status: encontrado.isVerified === 'true' ? 'Ganado' : 'Pendiente',
-            icon: '/icons/drink.png'
+            icon: '/icons/drink.png',
           },
           {
             title: 'SMASH BURGER',
             description: 'Haz un recargo mínimo',
             status: encontrado.didDeposit === 'true' ? 'Ganado' : 'Pendiente',
-            icon: '/icons/burger.png'
-          }
+            icon: '/icons/burger.png',
+          },
         ];
 
         setRewards(premios);
@@ -100,12 +104,9 @@ const SearchDesktop = () => {
         setError("No se encontró ningún participante con ese RUT.");
       }
 
-      setLoading(false); // Detiene loader
-    }, 1000); // Delay animación
+      setLoading(false);
+    }, 1000);
   };
-
-
-
 
   return (
     <section className={styles['checker-container']}>
@@ -133,29 +134,22 @@ const SearchDesktop = () => {
                 value={rut}
                 onChange={(e) => setRut(e.target.value)}
               />
-            
-                <button className={styles['clear-btn']} > <CiSearch />
- </button>
-              
 
+              <button className={styles['clear-btn']}><CiSearch /></button>
               <button className={styles['search-btn']} onClick={handleSearch}>Buscar</button>
             </div>
 
             {loading && <div className={styles.loader}></div>}
-
 
             {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
           </div>
 
           {user && rewards.length > 0 && (
             <div className={`${styles['rewards-box']} ${rewards.length > 0 ? styles['rewards-box-enter'] : ''}`}>
-
-
               <h3>PREMIOS POR GANAR</h3>
               {rewards.map((reward, index) => (
-                <Boleto key={index} />
+                <Boleto key={index} {...reward} />
               ))}
-
             </div>
           )}
         </div>
@@ -165,18 +159,3 @@ const SearchDesktop = () => {
 };
 
 export default SearchDesktop;
-
-
-
-
-{/* <div key={index} className={styles['reward-card']}>
-<div className={styles['reward-status']}>{reward.status}</div>
-<div className={styles['reward-info']}>
-  <img src={reward.icon} alt={reward.title} />
-  <div>
-    <strong>{reward.title}</strong>
-    <p>{reward.description}</p>
-    <span>Válido hasta agotar existencia</span>
-  </div>
-</div>
-</div> */}
