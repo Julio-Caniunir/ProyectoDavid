@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Search from '../search/search'
+import Search from '../search/Search';
 import SearchDesktop from '../search/SearchDesktop'
 import useIsMobile from '../Hooks/useIsMobile'
 import './StepContainer.css';
