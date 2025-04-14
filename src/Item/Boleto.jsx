@@ -31,7 +31,7 @@ const TicketPromo = ({ img, status, title, description, note }) => {
         <ModalCupon
           userName="David Salas"
           code="ESTELAR9203"
-          ticketQR="./../../public/qr_img.png"
+          ticketQR="/qr_img.png"
           onClose={() => setShowModal(false)}
         />
       )}

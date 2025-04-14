@@ -53,7 +53,7 @@ const Carrousel = () => {
       <div className="carrouselContainer">
         {isMobile && (
           <button className="buttonLeft" onClick={goLeft}>
-            <img src="./../../public/chevron-left.svg" alt="Anterior" />
+            <img src="/chevron-left.svg" alt="Anterior" />
           </button>
         )}
 
@@ -75,7 +75,7 @@ const Carrousel = () => {
 
         {isMobile && (
           <button className="buttonRight" onClick={goRight}>
-            <img src="./../../public/chevron-right.svg" alt="Siguiente" />
+            <img src="/chevron-right.svg" alt="Siguiente" />
           </button>
         )}
       </div>

@@ -14,9 +14,9 @@ const ModalPremio = ({ userName, code, onClose, ticketQR }) => {
       <div className={styles.ticketModal}>
         <div className={styles.ticketCard}>
           <div className={styles.ticketHeader}>
-            <img src="./../../public/logoProvider.png" alt="GRDS" style={{ height: 30 }} />
+            <img src="/logoProvider.png" alt="GRDS" style={{ height: 30 }} />
             <span>x</span>
-            <img src="./../../public/LogoEstelarbet.png" alt="Estelarbet" style={{ height: 30 }} />
+            <img src="/LogoEstelarbet.png" alt="Estelarbet" style={{ height: 30 }} />
           </div>
 
           <h2 className={styles.ticketTitle}>FELICIDADES</h2>
