@@ -4,15 +4,15 @@ import styles from './CarrouselFaq.module.css';
 const items = [
   {
     name: "Smash burger",
-    image: "./../../public/hamburger.png",
+    image: "/hamburger.png",
   },
   {
     name: "Vaso de bebida",
-    image: "./../../public/vasodebebida.png",
+    image: "/vasodebebida.png",
   },
   {
     name: "Papas fritas",
-    image: "./../../public/comboGRDS.png",
+    image: "/comboGRDS.png",
   },
 ];
 

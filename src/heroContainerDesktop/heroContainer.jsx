@@ -4,7 +4,7 @@ import styles from './HeroContainer.module.css';
 const HeroContainer = () => {
   return (
     <div className={styles['hero-wrapper']}>
-      <img className={styles['hero-image']} src="./../../public/hero-img.png" alt="" />
+      <img className={styles['hero-image']} src="/hero-img.png" alt="" />
 
       <svg
         className={`${styles['hero-svg']} ${styles.borde}`}

@@ -7,7 +7,7 @@ const Header = () => {
   return (
    <header >
 
-   <Brand logoSrcProvider="./../../public/logoProvider.png" logoSrcEstelarbet="./../../public/logoEstelarbet.png"/>
+   <Brand logoSrcProvider="/logoProvider.png" logoSrcEstelarbet="/logoEstelarbet.png"/>
    
    <Enlace estiloscomponent="participa participa-black" enlaceClick="https://www.estelarbet.vip" textenlace="Participa ahora" />
 

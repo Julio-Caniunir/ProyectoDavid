@@ -10,7 +10,7 @@ const FaqComponent = () => {
     <h2 id="premios">Premios</h2>
     <CarrouselFaqComponent />
     <div className='faqParticipaContainer'style={{
-    backgroundImage: "url('./../../public/backgroundGRDS.png')",
+    backgroundImage: "url('/backgroundGRDS.png')",
     backgroundSize: "cover", // Para cubrir todo el div
     backgroundPosition: "center", // Centrar la imagen
     backgroundRepeat: "no-repeat" // Evitar que se repita

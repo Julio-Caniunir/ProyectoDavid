@@ -5,17 +5,17 @@ const slides = [
   {
     num: 1,
     text: "Regístrate en Estelarbet y reclama tu primer premio: unas PAPAS FRITAS gratis",
-    img: "./../../public/papasFritas.png",
+    img: "/papasFritas.png",
   },
   {
     num: 2,
     text: "Deposita por primera vez y recibe un bono del 100%",
-    img: "./../../public/vaso.png",
+    img: "/vaso.png",
   },
   {
     num: 3,
     text: "Juega tus slots favoritas y gana giros gratis",
-    img: "./../../public/hamburgericon.png",
+    img: "/hamburgericon.png",
   }
   
 ];

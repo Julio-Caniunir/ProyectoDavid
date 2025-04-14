@@ -11,7 +11,7 @@ const ContentContainer = () => {
 
 
     <div className='heroContainer'>
-    <HeroComponent HeroImgSrc="./../../public/hero-img.png"/>
+    <HeroComponent HeroImgSrc="/hero-img.png"/>
     <div className='heroContent'>
     <Fecha fechaInicio="dd.mm.aaaa" fechaTermino="dd.mm.aaaa"/>
     <Title TitleContent="GRDS X ESTELARBET, ¡GANAR TRAGAR GANAR!"  TitleType="h1"/>
