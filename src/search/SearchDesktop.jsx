@@ -7,7 +7,7 @@ import useSocket from '../Hooks/useSocket';
 import Boleto from './../Item/Boleto'
 
 
-const socket = io("http://bc-api.estelarbet.net");
+const socket = io("https://bc-api.estelarbet.net");
 
 // 🔧 Limpia puntos y guiones del RUT
 const limpiarRUT = (rut) => rut.replace(/\./g, '').replace(/-/g, '').toLowerCase();
