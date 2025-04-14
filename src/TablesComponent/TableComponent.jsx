@@ -1,5 +1,5 @@
 import React from 'react'
-import './TablesComponent.css';
+import './tableComponent.css';
 
 
 
