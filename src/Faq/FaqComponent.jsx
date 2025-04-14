@@ -1,7 +1,7 @@
 import React from 'react';
 import './Faq.css';
 import CarrouselFaqComponent from '../CarrouselFaq/CarrouselFaqComponent';
-import Enlace from '../buttons/link';
+import Enlace from '../buttons/Link';
 import FaqDropdown from '../FaqDropdowns/FaqDropdown';
 const FaqComponent = () => {
   return (
