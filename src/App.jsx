@@ -1,7 +1,6 @@
 import './App.css';
-import ContentContainer from './ContentContainer/ContentContainer';
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import RolePage from "./RolePage";
 import NotFound from "./NotFound";
 
@@ -9,13 +8,16 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Ruta para la página principal */}
-        <Route path="/" element={<ContentContainer />} />
+        {/* Redirige / hacia /role */}
+        <Route path="/" element={<Navigate to="/role" />} />
 
-        {/* Ruta dinámica */}
+        {/* Ruta con tipo (participante o cobrador) */}
         <Route path="/role/:type" element={<RolePage />} />
 
-        {/* Ruta para cualquier otra (404) */}
+        {/* Ruta sin tipo: muestra las opciones */}
+        <Route path="/role" element={<RolePage />} />
+
+        {/* Página no encontrada */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
