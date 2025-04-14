@@ -34,16 +34,17 @@ const SearchDesktop = () => {
 
   // 🔌 Fetch desde Netlify Function (proxy)
   useEffect(() => {
-    fetch("/socket-proxy")
+    fetch("https://socket-proxy-2dre.onrender.com/members")
       .then((res) => res.json())
       .then((data) => {
         setMembers(data);
       })
       .catch((err) => {
-        console.error("Error al obtener datos desde el proxy:", err);
+        console.error("Error al obtener datos desde Render proxy:", err);
         setError("No se pudo conectar al servidor.");
       });
   }, []);
+  
 
   const handleSearch = () => {
     setLoading(true);

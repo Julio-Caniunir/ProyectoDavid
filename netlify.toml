@@ -1,7 +1,0 @@
-[functions]
-  directory = "netlify/functions"
-
-[[redirects]]
-  from = "/socket-proxy"
-  to = "/.netlify/functions/socket-proxy"
-  status = 200
